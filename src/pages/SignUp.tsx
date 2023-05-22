@@ -7,7 +7,7 @@ import { Box, Grid, Stack, StepLabel, Theme, useMediaQuery } from '@mui/material
 
 import PersonalDetailForm from '../organism/PersonalDetailForm';
 import ContactDetailForm from '../organism/ContactDetailForm';
-import MedicalDetailForm from '../organism/RegisterDetailForm';
+import MedicalDetailForm from '../organism/MedicalDetailForm';
 import RegisterDetailForm from '../organism/RegisterDetailForm';
 import StyledButton from '../components/Button/CustomButton';
 
