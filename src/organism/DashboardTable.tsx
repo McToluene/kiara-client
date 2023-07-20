@@ -13,29 +13,31 @@ import {
   styled,
   tableCellClasses,
 } from '@mui/material';
-import TablePaginationActions from '@mui/material/TablePagination/TablePaginationActions';
 import { useState } from 'react';
+import Arrow from '../Images/arrow-down.svg';
+import User from '../Images/Avatar-female.svg';
+import TablePaginationActions from '@mui/material/TablePagination/TablePaginationActions';
 
-function createData(name: string, calories: number, fat: number) {
-  return { name, calories, fat };
+function createData(name: string, type: number, date: string, status: any) {
+  return { name, type, date, status };
 }
 const rows = [
-  createData('Cupcake', 305, 3.7),
-  createData('Donut', 452, 25.0),
-  createData('Eclair', 262, 16.0),
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Gingerbread', 356, 16.0),
-  createData('Honeycomb', 408, 3.2),
-  createData('Ice cream sandwich', 237, 9.0),
-  createData('Jelly Bean', 375, 0.0),
-  createData('KitKat', 518, 26.0),
-  createData('Lollipop', 392, 0.2),
-  createData('Marshmallow', 318, 0),
-  createData('Nougat', 360, 19.0),
-  createData('Oreo', 437, 18.0),
-  createData('Oreo', 437, 18.0),
-  createData('Oreo', 437, 18.0),
-].sort((a, b) => (a.calories < b.calories ? -1 : 1));
+  createData('Cupcake', 305, '5 February 2022', 'Done'),
+  createData('Donut', 452, '5 February 2022', 'Done'),
+  createData('Eclair', 262, '5 February 2022', 'Done'),
+  createData('Frozen yoghurt', 159, '5 February 2022', 'Done'),
+  createData('Gingerbread', 356, '5 February 2022', 'Done'),
+  createData('Honeycomb', 408, '5 February 2022', 'Done'),
+  createData('Ice cream sandwich', 237, '5 February 2022', 'Done'),
+  createData('Jelly Bean', 375, '5 February 2022', 'Done'),
+  createData('KitKat', 518, '5 February 2022', 'Done'),
+  createData('Lollipop', 392, '5 February 2022', 'Done'),
+  createData('Marshmallow', 318, '5 February 2022', 'Done'),
+  createData('Nougat', 360, '5 February 2022', 'Done'),
+  createData('Oreo', 437, '5 February 2022', 'Done'),
+  createData('Oreo', 437, '5 February 2022', 'Done'),
+  createData('Oreo', 437, '5 February 2022', 'Done'),
+].sort((a, b) => (a.type < b.type ? -1 : 1));
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -52,9 +54,13 @@ export default function DashboardTable() {
   const [rowsPerPage, setRowsPerPage] = useState(7);
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
     setPage(newPage);
   };
 
@@ -68,7 +74,7 @@ export default function DashboardTable() {
   return (
     <Box width={'100%'} marginTop={{ xs: '2.5em', md: '0' }}>
       <Typography
-        variant='h6'
+        variant="h6"
         gutterBottom
         sx={{
           fontWeight: 500,
@@ -79,15 +85,25 @@ export default function DashboardTable() {
       <TableContainer
         component={Paper}
         elevation={0}
-        style={{ border: '1px solid #ededed', borderRadius: '8px' }}
+        style={{ border: '1px solid #ededed', borderRadius: '1rem' }}
+        className="mt-10"
       >
-        <Table sx={{ minWidth: 500 }} aria-label='custom pagination table'>
+        <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Doctor Name</StyledTableCell>
-              <StyledTableCell align='right'>Type</StyledTableCell>
-              <StyledTableCell align='right'>Date</StyledTableCell>
-              <StyledTableCell align='right'>Status</StyledTableCell>
+              <StyledTableCell style={{ color: '#74828E', display: 'flex' }}>
+                {' '}
+                Doctor Name <img src={Arrow} alt="arrow" />
+              </StyledTableCell>
+              <StyledTableCell style={{ color: '#74828E' }}>
+                Type
+              </StyledTableCell>
+              <StyledTableCell style={{ color: '#74828E' }}>
+                Date
+              </StyledTableCell>
+              <StyledTableCell style={{ color: '#74828E' }}>
+                Status
+              </StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -96,14 +112,22 @@ export default function DashboardTable() {
               : rows
             ).map((row) => (
               <TableRow key={row.name}>
-                <TableCell style={{ borderColor: '#f5f5f5' }} component='th' scope='row'>
-                  {row.name}
+                <TableCell
+                  style={{ borderColor: '#f5f5f5', display: 'flex', gap: 10 }}
+                  component="th"
+                  scope="row"
+                >
+                  <img src={User} alt="name" />
+                  <div className='mt-3'>{row.name}</div>
                 </TableCell>
-                <TableCell style={{ width: 160, borderColor: '#f5f5f5' }} align='right'>
-                  {row.calories}
+                <TableCell style={{ width: 160, borderColor: '#f5f5f5' }}>
+                  {row.type}
                 </TableCell>
-                <TableCell style={{ width: 160, borderColor: '#f5f5f5' }} align='right'>
-                  {row.fat}
+                <TableCell style={{ width: 160, borderColor: '#f5f5f5' }}>
+                  {row.date}
+                </TableCell>
+                <TableCell style={{ width: 160, borderColor: '#f5f5f5' }}>
+                  {row.status}
                 </TableCell>
               </TableRow>
             ))}

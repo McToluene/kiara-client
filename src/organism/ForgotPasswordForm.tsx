@@ -1,37 +1,28 @@
-import { Stack, TextField, Typography } from '@mui/material';
+import { Stack, TextField } from '@mui/material';
 import StyledButton from '../components/Button/CustomButton';
 
 export default function ForgotPasswordForm() {
   return (
     <Stack
-      component='form'
+      component="form"
       sx={{
-        width: '30ch',
+        width: '35ch',
       }}
       noValidate
-      autoComplete='off'
+      autoComplete="off"
     >
-      <Typography
-        variant='h3'
-        gutterBottom
-        sx={{
-          fontWeight: 700,
-        }}
-      >
-        Forgot password
-      </Typography>
-      <Typography
-        variant='subtitle2'
-        gutterBottom
-        sx={{
-          fontFamily: 'Raleway',
-          color: 'black',
-        }}
-      >
-        Provide your email to recover your account
-      </Typography>
-      <TextField id='username' label='Username' variant='outlined' size='small' margin='normal' />
-      <StyledButton variant='contained'>Reset Passworx</StyledButton>
+      <h1 className="text-3xl font-bold">Forgot password</h1>
+      <h5>Provide your email to recover your account</h5>
+      <div className="mt-10"></div>
+      <TextField
+        id="username"
+        label="Username"
+        variant="outlined"
+        size="small"
+        margin="normal"
+      />
+      <div className="mt-5"></div>
+      <StyledButton variant="contained">Reset Password</StyledButton>
     </Stack>
   );
 }

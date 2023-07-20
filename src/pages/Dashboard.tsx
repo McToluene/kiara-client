@@ -5,7 +5,7 @@ import DashboardTable from '../organism/DashboardTable';
 
 export default function Dashboard() {
   return (
-    <Container maxWidth='lg'>
+    <Container maxWidth="lg">
       <Grid container height={'100%'} paddingTop={'1.5em'}>
         <Grid
           item
@@ -19,8 +19,12 @@ export default function Dashboard() {
             flexDirection: 'column',
           }}
         >
-          <DashboardHeader />
-          <DashboardTable />
+          <div className="mt-10 w-[850px] mr-10">
+            <DashboardHeader />
+          </div>
+          <div className="mt-10 w-[850px] mr-10">
+            <DashboardTable />
+          </div>
         </Grid>
         <AvailableDoctors />
       </Grid>

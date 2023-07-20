@@ -9,8 +9,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import User from '../../Images/other-user.svg'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import Logo from '../../Images/kiara-logo.png';
+import { useState } from 'react';
 
 const pages = ['Home', 'About Us', 'Services', 'Fees'];
 
@@ -23,6 +26,15 @@ function ResponsiveAppBar() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+  
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -82,7 +94,34 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-
+          <p className='text-[#313340] text-sm font-medium'>Contact us</p>
+          <div>
+          <Button
+            id="basic-button"
+            aria-controls={open ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            onClick={handleClick}
+            endIcon={<KeyboardArrowDownIcon />}
+          >
+            <img src={User} alt='user' className='ml-3'/>
+            <p className='text-[#313340] text-sm font-medium ml-1'>Olalekun Ayodeji</p>
+            
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+              color: '#313340'
+            }}
+          >
+            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>Logout</MenuItem>
+          </Menu>
+        </div>
           <Box sx={{ flexGrow: 0 }}></Box>
         </Toolbar>
       </Container>

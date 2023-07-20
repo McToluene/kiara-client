@@ -5,18 +5,18 @@ import DoctorCard from '../components/Doctor/DoctorCard';
 const doctors = [
   {
     name: 'Dr. Genny Wealth',
+    specialization: 'Ophthalmology',
+  },
+  {
+    name: 'Dr. Genny Wealth',
     specialization: 'General',
   },
   {
-    name: 'Dr. Genny ealth',
-    specialization: 'General',
+    name: 'Dr. Genny Wealth',
+    specialization: 'Ophthalmology',
   },
   {
-    name: 'Dr. Genny Weath',
-    specialization: 'General',
-  },
-  {
-    name: 'Dr. Genny Wealt',
+    name: 'Dr. Genny Wealth',
     specialization: 'General',
   },
 ];
@@ -44,9 +44,10 @@ export default function AvailableDoctors() {
         Available Doctors
       </Typography>
       <TextField
-        label='With normal TextField'
-        id='outlined-start-adornment'
-        sx={{ m: 1, width: '25ch' }}
+        // label='Search for a doctor....'
+        placeholder='Search for a doctor....'
+        // id='outlined-start-adornment'
+        sx={{ m: 1, width: '28ch' }}
         InputProps={{
           startAdornment: (
             <InputAdornment position='start'>
