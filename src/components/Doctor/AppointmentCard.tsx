@@ -5,6 +5,8 @@ type AppointmentCardProps = {
   name: string;
   date: string;
   time: string;
+  image:React.ReactNode;
+  specialty: string;
 };
 
 export default function AppointmentCard(props: AppointmentCardProps) {
@@ -19,20 +21,20 @@ export default function AppointmentCard(props: AppointmentCardProps) {
       }}
     >
       <CardContent style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Avatar alt='Remy Sharp' src={image} sx={{ width: 56, height: 56 }} />
+        {props.image}
         <Box width='80%'>
           <Typography gutterBottom variant='h6'>
-            Mrs Adeniyi Felicia
+            {props.name}
           </Typography>
           <Typography variant='body2' color='text.secondary'>
-            Practise nurse, B.SC Nursing, Cert Mangt OND, HND Agric Mech
+            {props.specialty}
           </Typography>
           <Box display='flex' justifyContent='space-between'>
             <Typography variant='body2' color='text.secondary' style={{color: '#212B36',}}>
-              5 February 2022
+              {props.date}
             </Typography>
             <Typography variant='body2' color='text.secondary' style={{color: '#212B36',}}>
-              12:00PM -1:00PM
+              {props.time}
             </Typography>
           </Box>
         </Box>

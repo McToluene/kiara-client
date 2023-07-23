@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Paper,
   Table,
@@ -15,29 +16,103 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import Arrow from '../Images/arrow-down.svg';
-import User from '../Images/Avatar-female.svg';
+import Male from '../Images/Avater-male.svg';
+import Chips from '../components/Chip/Chip';
+import Other from '../Images/Avatar-others.svg';
+import Female from '../Images/Avatar-female.svg';
 import TablePaginationActions from '@mui/material/TablePagination/TablePaginationActions';
+import moment from 'moment';
 
-function createData(name: string, type: number, date: string, status: any) {
-  return { name, type, date, status };
-}
 const rows = [
-  createData('Cupcake', 305, '5 February 2022', 'Done'),
-  createData('Donut', 452, '5 February 2022', 'Done'),
-  createData('Eclair', 262, '5 February 2022', 'Done'),
-  createData('Frozen yoghurt', 159, '5 February 2022', 'Done'),
-  createData('Gingerbread', 356, '5 February 2022', 'Done'),
-  createData('Honeycomb', 408, '5 February 2022', 'Done'),
-  createData('Ice cream sandwich', 237, '5 February 2022', 'Done'),
-  createData('Jelly Bean', 375, '5 February 2022', 'Done'),
-  createData('KitKat', 518, '5 February 2022', 'Done'),
-  createData('Lollipop', 392, '5 February 2022', 'Done'),
-  createData('Marshmallow', 318, '5 February 2022', 'Done'),
-  createData('Nougat', 360, '5 February 2022', 'Done'),
-  createData('Oreo', 437, '5 February 2022', 'Done'),
-  createData('Oreo', 437, '5 February 2022', 'Done'),
-  createData('Oreo', 437, '5 February 2022', 'Done'),
-].sort((a, b) => (a.type < b.type ? -1 : 1));
+  {
+    _id: 1,
+    image:<Avatar alt='profile-pic' src={Male} />,
+    name: 'Mrs Adeniyi Felicia',
+    type: 'Emergency',
+    date: '2023-02-05T22:14:00.486+00:00',
+    status: <Chips label='Done' />
+  },
+  {
+    _id: 2,
+    image:<Avatar alt='profile-pic' src={Female} />,
+    name: 'Mrs Adeniyi Felicia',
+    type: 'Emergency',
+    date: '2023-02-05T22:14:00.486+00:00',
+    status: <Chips label='Pending' />,
+  },
+  {
+    _id: 3,
+    image:<Avatar alt='profile-pic' src={Female} />,
+    name: 'Mrs Adeniyi Felicia',
+    type: 'Emergency',
+    date: '2023-02-05T22:14:00.486+00:00',
+    status:<Chips label='Pending' />,
+  },
+  {
+    _id: 4,
+    image:<Avatar alt='profile-pic' src={Male} />,
+    name: 'Mrs Adeniyi Felicia',
+    type: 'Emergency',
+    date: '2023-02-05T22:14:00.486+00:00',
+    status:<Chips label='Pending' />,
+  },
+  {
+    _id: 5,
+    image:<Avatar alt='profile-pic' src={Other} />,
+    name: 'Mrs Adeniyi Felicia',
+    type: 'Emergency',
+    date: '2023-02-05T22:14:00.486+00:00',
+    status:<Chips label='Pending' />,
+  },
+  {
+    _id: 6,
+    image:<Avatar alt='profile-pic' src={Other} />,
+    name: 'Mrs Adeniyi Felicia',
+    type: 'Emergency',
+    date: '2023-02-05T22:14:00.486+00:00',
+    status:<Chips label='Done' />,
+  },
+  {
+    _id: 7,
+    image:<Avatar alt='profile-pic' src={Female} />,
+    name: 'Mrs Adeniyi Felicia',
+    type: 'Non-Emergency',
+    date: '2023-02-05T22:14:00.486+00:00',
+    status: <Chips label='Done' />,
+  },
+  {
+    _id: 8,
+    image:<Avatar alt='profile-pic' src={Other} />,
+    name: 'Mrs Adeniyi Felicia',
+    type: 'Non-Emergency',
+    date: '2023-02-05T22:14:00.486+00:00',
+    status:<Chips label='Done' />,
+  },
+  {
+    _id: 9,
+    image:<Avatar alt='profile-pic' src={Female} />,
+    name: 'Mrs Adeniyi Felicia',
+    type: 'Non-Emergency',
+    date: '2023-02-05T22:14:00.486+00:00',
+    status:<Chips label='Done' />,
+  },
+  {
+    _id: 10,
+    image:<Avatar alt='profile-pic' src={Female} />,
+    name: 'Mrs Adeniyi Felicia',
+    type: 'Non-Emergency',
+    date: '2023-02-05T22:14:00.486+00:00',
+    status:<Chips label='Done' />,
+  },
+  {
+    _id: 11,
+    image:<Avatar alt='profile-pic' src={Other} />,
+    name: 'Mrs Adeniyi Feliciaaa',
+    type: 'Non-Emergency',
+    date: '2023-02-05T22:14:00.486+00:00',
+    status:<Chips label='Done' />,
+  },
+]
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -51,7 +126,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 export default function DashboardTable() {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(7);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -117,14 +192,15 @@ export default function DashboardTable() {
                   component="th"
                   scope="row"
                 >
-                  <img src={User} alt="name" />
+                  {/* <Avatar alt='profile-pic' src={Female} /> */}
+                  <div className='mt-3'>{row.image}</div>
                   <div className='mt-3'>{row.name}</div>
                 </TableCell>
                 <TableCell style={{ width: 160, borderColor: '#f5f5f5' }}>
                   {row.type}
                 </TableCell>
                 <TableCell style={{ width: 160, borderColor: '#f5f5f5' }}>
-                  {row.date}
+                  {moment(row.date).format('D MMMM YYYY')}
                 </TableCell>
                 <TableCell style={{ width: 160, borderColor: '#f5f5f5' }}>
                   {row.status}
@@ -140,7 +216,7 @@ export default function DashboardTable() {
           <TableFooter>
             <TableRow>
               <TablePagination
-                rowsPerPageOptions={[8, 10, 25, { label: 'All', value: -1 }]}
+                rowsPerPageOptions={[10, 20, { label: 'All', value: -1 }]}
                 colSpan={3}
                 count={rows.length}
                 rowsPerPage={rowsPerPage}

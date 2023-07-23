@@ -1,7 +1,10 @@
-import { Link, Stack, TextField, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import StyledButton from '../components/Button/CustomButton';
+import { Link, Stack, TextField, Typography } from '@mui/material';
 
 export default function LoginForm() {
+  const navigate = useNavigate();
+
   return (
     <Stack
       component='form'
@@ -35,7 +38,7 @@ export default function LoginForm() {
       <Link href='#' sx={{ marginBottom: '3em', marginTop: '.5em' }}>
         Forgot Password?
       </Link>
-      <StyledButton variant='contained'>Login</StyledButton>
+      <StyledButton variant='contained' onClick={() => navigate('/dashboard')}>Login</StyledButton>
     </Stack>
   );
 }
