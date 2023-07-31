@@ -3,27 +3,17 @@ import Profile from '../Images/Avatar-others.svg';
 import { SearchOutlined } from '@mui/icons-material';
 import DoctorCard from '../components/Doctor/DoctorCard';
 import { Avatar, Box, Grid, InputAdornment, TextField, Typography } from '@mui/material';
-
-const doctors = [
-  {
-    _id: 1,
-    name: 'Mrs Adeniyi Felicia',
-    specialization: 'Practise nurse, B.SC Nursing, Cert Mangt OND, HND Agric Mech',
-    avatar: (
-      <Avatar alt="Remy Sharp" src={Image} sx={{ width: 56, height: 56 }} />
-    ),
-  },
-  {
-    _id: 1,
-    name: 'Dr. Genny Wealth',
-    specialization: 'Practise nurse, B.SC Nursing, Cert Mangt OND, HND Agric Mech',
-    avatar: (
-      <Avatar alt="Remy Sharp" src={Profile} sx={{ width: 56, height: 56 }} />
-    ),
-  },
-];
+import { getAllDoctors } from '../server/doctor';
+import { useQuery } from 'react-query';
+import { useState } from 'react';
 
 export default function AvailableDoctors() {
+  const [limit] = useState<number>(10);
+
+  // const { data } = useQuery('get-All-Doctors', () => getAllDoctors({page: 1, limit:limit}));
+  const { data } = useQuery('get-All-Doctors', () => getAllDoctors());
+  data && console.log("dataa", data?.data)
+
   return (
     <Grid
       item
@@ -60,8 +50,8 @@ export default function AvailableDoctors() {
       />
 
       <Box>
-        {doctors.map((doctor) => (
-          <DoctorCard key={doctor._id} name={doctor.name} description={doctor.specialization} avatar={doctor.avatar} />
+        {data?.data?.map((doctor: { _id: string, name: string, specialization: string}) => (
+          <DoctorCard key={doctor._id} name={doctor.name} description={doctor.specialization}/>
         ))}
       </Box>
     </Grid>

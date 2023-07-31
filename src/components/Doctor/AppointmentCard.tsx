@@ -1,11 +1,11 @@
 import { Avatar, Box, Card, CardContent, Typography } from '@mui/material';
-import image from '../../Images/felicia.png';
+import image from '../../Images/Avatar-others.svg';
 
 type AppointmentCardProps = {
   name: string;
-  date: string;
-  time: string;
-  image:React.ReactNode;
+  date?: string;
+  time?: string;
+  // image:React.ReactNode;
   specialty: string;
 };
 
@@ -20,9 +20,10 @@ export default function AppointmentCard(props: AppointmentCardProps) {
         border: '0.003em solid #D3D3D3',
       }}
     >
-      <CardContent style={{ display: 'flex', justifyContent: 'space-between' }}>
-        {props.image}
-        <Box width='80%'>
+      <CardContent style={{ display: 'flex', justifyContent: 'space-between'}}>
+        {/* {props.image} */}
+        <Avatar alt="Remy Sharp" src={image} sx={{ width: 56, height: 56 }} />
+        <Box width={'403px'}>
           <Typography gutterBottom variant='h6'>
             {props.name}
           </Typography>
@@ -31,10 +32,10 @@ export default function AppointmentCard(props: AppointmentCardProps) {
           </Typography>
           <Box display='flex' justifyContent='space-between'>
             <Typography variant='body2' color='text.secondary' style={{color: '#212B36',}}>
-              {props.date}
+              {props.date || 'Not provided'}
             </Typography>
             <Typography variant='body2' color='text.secondary' style={{color: '#212B36',}}>
-              {props.time}
+              {props.time || 'Not provided'}
             </Typography>
           </Box>
         </Box>

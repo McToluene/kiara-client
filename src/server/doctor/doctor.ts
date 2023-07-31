@@ -1,8 +1,10 @@
 import { instance, next } from '../base';
 
 interface IDoctor {
-  name: string;
-  specialization: string;
+  name?: string;
+  specialization?: string;
+  appointments?: string[];
+  availability?: string[]
 }
 
 type Doctor = {
@@ -27,10 +29,11 @@ export const getDoctor = async (doctorId: string) => {
   return data?.data;
 };
 
-export const getAllDoctors = async (value: Doctor) => {
+// export const getAllDoctors = async (value: Doctor) => {
+export const getAllDoctors = async () => {
   const { data } = await instance(false)
-    .get(`doctors?page=${value.page}&limit=${value.limit}`)
+    .get(`doctors?page=${1}&limit=${10}`)
     .catch((e) => next(e));
 
-  return data?.data;
+  return data;
 };

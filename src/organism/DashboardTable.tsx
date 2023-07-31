@@ -14,135 +14,17 @@ import {
   styled,
   tableCellClasses,
 } from '@mui/material';
-import { ReactNode, useState } from 'react';
+import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useState } from 'react';
 import Arrow from '../Images/arrow-down.svg';
-import Male from '../Images/Avater-male.svg';
+import Image from '../Images/Avatar-others.svg';
 import Chips from '../components/Chip/Chip';
 import Other from '../Images/Avatar-others.svg';
 import Female from '../Images/Avatar-female.svg';
 import TablePaginationActions from '@mui/material/TablePagination/TablePaginationActions';
 import moment from 'moment';
+import { useQuery } from 'react-query';
+import { getAllAppointment } from '../server/appointment';
 
-interface Column {
-  id: string;
-  label: string | ReactNode;
-  minWidth?: number;
-  align?: 'right';
-  format?: (value: number) => string;
-}
-
-const columns: readonly Column[] = [
-  {
-    id: 'name',
-    label: (
-      <div>
-        Doctor Name <img src={Arrow} alt="arrow" />
-      </div>
-    ),
-  },
-  { id: 'type', label: 'Type' },
-  {
-    id: 'date',
-    label: 'Date',
-    align: 'right',
-  },
-  {
-    id: 'status',
-    label: 'Status',
-    align: 'right',
-  },
-];
-
-const rows = [
-  {
-    _id: 1,
-    image: <Avatar alt="profile-pic" src={Male} />,
-    name: 'Mrs Adeniyi Felicia',
-    type: 'Emergency',
-    date: '2023-02-05T22:14:00.486+00:00',
-    status: <Chips label="Done" />,
-  },
-  {
-    _id: 2,
-    image: <Avatar alt="profile-pic" src={Female} />,
-    name: 'Mrs Adeniyi Felicia',
-    type: 'Emergency',
-    date: '2023-02-05T22:14:00.486+00:00',
-    status: <Chips label="Pending" />,
-  },
-  {
-    _id: 3,
-    image: <Avatar alt="profile-pic" src={Female} />,
-    name: 'Mrs Adeniyi Felicia',
-    type: 'Emergency',
-    date: '2023-02-05T22:14:00.486+00:00',
-    status: <Chips label="Pending" />,
-  },
-  {
-    _id: 4,
-    image: <Avatar alt="profile-pic" src={Male} />,
-    name: 'Mrs Adeniyi Felicia',
-    type: 'Emergency',
-    date: '2023-02-05T22:14:00.486+00:00',
-    status: <Chips label="Pending" />,
-  },
-  {
-    _id: 5,
-    image: <Avatar alt="profile-pic" src={Other} />,
-    name: 'Mrs Adeniyi Felicia',
-    type: 'Emergency',
-    date: '2023-02-05T22:14:00.486+00:00',
-    status: <Chips label="Pending" />,
-  },
-  {
-    _id: 6,
-    image: <Avatar alt="profile-pic" src={Other} />,
-    name: 'Mrs Adeniyi Felicia',
-    type: 'Emergency',
-    date: '2023-02-05T22:14:00.486+00:00',
-    status: <Chips label="Done" />,
-  },
-  {
-    _id: 7,
-    image: <Avatar alt="profile-pic" src={Female} />,
-    name: 'Mrs Adeniyi Felicia',
-    type: 'Non-Emergency',
-    date: '2023-02-05T22:14:00.486+00:00',
-    status: <Chips label="Done" />,
-  },
-  {
-    _id: 8,
-    image: <Avatar alt="profile-pic" src={Other} />,
-    name: 'Mrs Adeniyi Felicia',
-    type: 'Non-Emergency',
-    date: '2023-02-05T22:14:00.486+00:00',
-    status: <Chips label="Done" />,
-  },
-  {
-    _id: 9,
-    image: <Avatar alt="profile-pic" src={Female} />,
-    name: 'Mrs Adeniyi Felicia',
-    type: 'Non-Emergency',
-    date: '2023-02-05T22:14:00.486+00:00',
-    status: <Chips label="Done" />,
-  },
-  {
-    _id: 10,
-    image: <Avatar alt="profile-pic" src={Female} />,
-    name: 'Mrs Adeniyi Felicia',
-    type: 'Non-Emergency',
-    date: '2023-02-05T22:14:00.486+00:00',
-    status: <Chips label="Done" />,
-  },
-  {
-    _id: 11,
-    image: <Avatar alt="profile-pic" src={Other} />,
-    name: 'Mrs Adeniyi Feliciaaa',
-    type: 'Non-Emergency',
-    date: '2023-02-05T22:14:00.486+00:00',
-    status: <Chips label="Done" />,
-  },
-];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -157,6 +39,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export default function DashboardTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const { data: rows } = useQuery('get-All-Appointment', () => getAllAppointment());
 
   // Avoid a layout jump when reaching the last page with empty rows.
   // const emptyRows =
@@ -212,27 +96,27 @@ export default function DashboardTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => (
-                <TableRow key={row.name}>
+            {rows?.data
+              ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              ?.map((row: { _id: string; doctorName: string; appointmentType: string, createdOn: string, status: string }) => (
+                <TableRow key={row._id}>
                   <TableCell
-                    style={{ borderColor: '#f5f5f5', display: 'flex', gap: 10 }}
+                    style={{ borderColor: '#f5f5f5', display: 'flex', gap: 20 }}
                     component="th"
                     scope="row"
                   >
-                    {/* <Avatar alt='profile-pic' src={Female} /> */}
-                    <div className="mt-3">{row.image}</div>
-                    <div className="mt-3">{row.name}</div>
+                    <Avatar alt='profile-pic' src={Image} />
+                    {/* <div className="mt-3">{row.image}</div> */}
+                    <div className="mt-3">{row.doctorName}</div>
                   </TableCell>
                   <TableCell style={{ width: 160, borderColor: '#f5f5f5' }}>
-                    {row.type}
+                    {row.appointmentType}
                   </TableCell>
                   <TableCell style={{ width: 160, borderColor: '#f5f5f5' }}>
-                    {moment(row.date).format('D MMMM YYYY')}
+                    {moment(row.createdOn).format('D MMMM YYYY')}
                   </TableCell>
                   <TableCell style={{ width: 160, borderColor: '#f5f5f5' }}>
-                    {row.status}
+                  <Chips label={row.status} />
                   </TableCell>
                 </TableRow>
               ))}
@@ -242,7 +126,7 @@ export default function DashboardTable() {
               <TablePagination
                 rowsPerPageOptions={[10, 20, { label: 'All', value: -1 }]}
                 colSpan={3}
-                count={rows.length}
+                count={rows?.data?.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{

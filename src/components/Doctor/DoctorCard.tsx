@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Card,
   CardActions,
@@ -6,11 +7,12 @@ import {
   Typography,
 } from '@mui/material';
 import StyledButton from '../Button/OutlineButton';
+import Profile from '../../Images/Avatar-others.svg';
 
 type DoctorCardProps = {
   name: string;
   description: string;
-  avatar: React.ReactNode;
+  avatar?: React.ReactNode;
 };
 
 export default function DoctorCard(props: DoctorCardProps) {
@@ -27,7 +29,8 @@ export default function DoctorCard(props: DoctorCardProps) {
         <CardContent
           style={{ display: 'flex', justifyContent: 'space-between' }}
         >
-          {props.avatar}
+          {/* {props.avatar} */}
+          <Avatar alt="Remy Sharp" src={Profile} sx={{ width: 56, height: 56 }} />
           <Box width={{ xs: '80%', md: '70%' }}>
             <Typography gutterBottom variant="body1">
               {props.name}

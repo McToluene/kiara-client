@@ -22,7 +22,7 @@ const BookAppointment = () => {
 
   return (
     <Container>
-      <div className="grid grid-cols-12 mt-20">
+      <div className="grid grid-cols-12 mt-20 md:pl-20">
         <div className="col-span-4 min-h-[calc(100vh-71px)]">
           <div className="grid gap-4 pt-10 gap-y-10">
             <div className={`grid gap-4 ${active >= 0 ? `font-medium` : ``}`}>
