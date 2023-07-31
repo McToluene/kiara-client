@@ -1,12 +1,18 @@
 import styled from '@emotion/styled';
 import { Button } from '@mui/material';
 
-const StyledButton = styled(Button)({
-  backgroundColor: '#2D699D',
+type StyledButtonProps = {
+  isLoading?: boolean;
+  onClick?: () => void;
+  children?: React.ReactNode;
+};
+
+const StyledButton = styled(Button)<StyledButtonProps>(({ isLoading }) => ({
+  backgroundColor: isLoading ? '#ccc' : '#2D699D',
   color: '#fff',
   '&:hover': {
-    backgroundColor: '#2D619D',
+    backgroundColor: isLoading ? '#ccc' : '#2D619D',
   },
-});
+}));
 
 export default StyledButton;

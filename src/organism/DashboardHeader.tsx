@@ -37,7 +37,7 @@ export default function DashboardHeader() {
           fontWeight: 500,
         }}
       >
-        <h1 className="ml-2">Upcoming appointments</h1>
+        <h1 className="md:ml-2">Upcoming appointments</h1>
       </Typography>
       <Grid
         container

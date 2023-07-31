@@ -23,12 +23,15 @@
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-query": "^3.39.3",
     "react-router-dom": "6",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.3",
     "styled-components": "^6.0.4",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yap": "^0.0.2",
+    "yup": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

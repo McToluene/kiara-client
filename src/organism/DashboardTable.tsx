@@ -14,7 +14,7 @@ import {
   styled,
   tableCellClasses,
 } from '@mui/material';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import Arrow from '../Images/arrow-down.svg';
 import Male from '../Images/Avater-male.svg';
 import Chips from '../components/Chip/Chip';
@@ -23,96 +23,126 @@ import Female from '../Images/Avatar-female.svg';
 import TablePaginationActions from '@mui/material/TablePagination/TablePaginationActions';
 import moment from 'moment';
 
+interface Column {
+  id: string;
+  label: string | ReactNode;
+  minWidth?: number;
+  align?: 'right';
+  format?: (value: number) => string;
+}
+
+const columns: readonly Column[] = [
+  {
+    id: 'name',
+    label: (
+      <div>
+        Doctor Name <img src={Arrow} alt="arrow" />
+      </div>
+    ),
+  },
+  { id: 'type', label: 'Type' },
+  {
+    id: 'date',
+    label: 'Date',
+    align: 'right',
+  },
+  {
+    id: 'status',
+    label: 'Status',
+    align: 'right',
+  },
+];
+
 const rows = [
   {
     _id: 1,
-    image:<Avatar alt='profile-pic' src={Male} />,
+    image: <Avatar alt="profile-pic" src={Male} />,
     name: 'Mrs Adeniyi Felicia',
     type: 'Emergency',
     date: '2023-02-05T22:14:00.486+00:00',
-    status: <Chips label='Done' />
+    status: <Chips label="Done" />,
   },
   {
     _id: 2,
-    image:<Avatar alt='profile-pic' src={Female} />,
+    image: <Avatar alt="profile-pic" src={Female} />,
     name: 'Mrs Adeniyi Felicia',
     type: 'Emergency',
     date: '2023-02-05T22:14:00.486+00:00',
-    status: <Chips label='Pending' />,
+    status: <Chips label="Pending" />,
   },
   {
     _id: 3,
-    image:<Avatar alt='profile-pic' src={Female} />,
+    image: <Avatar alt="profile-pic" src={Female} />,
     name: 'Mrs Adeniyi Felicia',
     type: 'Emergency',
     date: '2023-02-05T22:14:00.486+00:00',
-    status:<Chips label='Pending' />,
+    status: <Chips label="Pending" />,
   },
   {
     _id: 4,
-    image:<Avatar alt='profile-pic' src={Male} />,
+    image: <Avatar alt="profile-pic" src={Male} />,
     name: 'Mrs Adeniyi Felicia',
     type: 'Emergency',
     date: '2023-02-05T22:14:00.486+00:00',
-    status:<Chips label='Pending' />,
+    status: <Chips label="Pending" />,
   },
   {
     _id: 5,
-    image:<Avatar alt='profile-pic' src={Other} />,
+    image: <Avatar alt="profile-pic" src={Other} />,
     name: 'Mrs Adeniyi Felicia',
     type: 'Emergency',
     date: '2023-02-05T22:14:00.486+00:00',
-    status:<Chips label='Pending' />,
+    status: <Chips label="Pending" />,
   },
   {
     _id: 6,
-    image:<Avatar alt='profile-pic' src={Other} />,
+    image: <Avatar alt="profile-pic" src={Other} />,
     name: 'Mrs Adeniyi Felicia',
     type: 'Emergency',
     date: '2023-02-05T22:14:00.486+00:00',
-    status:<Chips label='Done' />,
+    status: <Chips label="Done" />,
   },
   {
     _id: 7,
-    image:<Avatar alt='profile-pic' src={Female} />,
+    image: <Avatar alt="profile-pic" src={Female} />,
     name: 'Mrs Adeniyi Felicia',
     type: 'Non-Emergency',
     date: '2023-02-05T22:14:00.486+00:00',
-    status: <Chips label='Done' />,
+    status: <Chips label="Done" />,
   },
   {
     _id: 8,
-    image:<Avatar alt='profile-pic' src={Other} />,
+    image: <Avatar alt="profile-pic" src={Other} />,
     name: 'Mrs Adeniyi Felicia',
     type: 'Non-Emergency',
     date: '2023-02-05T22:14:00.486+00:00',
-    status:<Chips label='Done' />,
+    status: <Chips label="Done" />,
   },
   {
     _id: 9,
-    image:<Avatar alt='profile-pic' src={Female} />,
+    image: <Avatar alt="profile-pic" src={Female} />,
     name: 'Mrs Adeniyi Felicia',
     type: 'Non-Emergency',
     date: '2023-02-05T22:14:00.486+00:00',
-    status:<Chips label='Done' />,
+    status: <Chips label="Done" />,
   },
   {
     _id: 10,
-    image:<Avatar alt='profile-pic' src={Female} />,
+    image: <Avatar alt="profile-pic" src={Female} />,
     name: 'Mrs Adeniyi Felicia',
     type: 'Non-Emergency',
     date: '2023-02-05T22:14:00.486+00:00',
-    status:<Chips label='Done' />,
+    status: <Chips label="Done" />,
   },
   {
     _id: 11,
-    image:<Avatar alt='profile-pic' src={Other} />,
+    image: <Avatar alt="profile-pic" src={Other} />,
     name: 'Mrs Adeniyi Feliciaaa',
     type: 'Non-Emergency',
     date: '2023-02-05T22:14:00.486+00:00',
-    status:<Chips label='Done' />,
+    status: <Chips label="Done" />,
   },
-]
+];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -129,11 +159,11 @@ export default function DashboardTable() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  // const emptyRows =
+  //   page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
+    event: unknown,
     newPage: number
   ) => {
     setPage(newPage);
@@ -142,7 +172,7 @@ export default function DashboardTable() {
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(Number(+event.target.value));
     setPage(0);
   };
 
@@ -182,36 +212,30 @@ export default function DashboardTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {(rowsPerPage > 0
-              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : rows
-            ).map((row) => (
-              <TableRow key={row.name}>
-                <TableCell
-                  style={{ borderColor: '#f5f5f5', display: 'flex', gap: 10 }}
-                  component="th"
-                  scope="row"
-                >
-                  {/* <Avatar alt='profile-pic' src={Female} /> */}
-                  <div className='mt-3'>{row.image}</div>
-                  <div className='mt-3'>{row.name}</div>
-                </TableCell>
-                <TableCell style={{ width: 160, borderColor: '#f5f5f5' }}>
-                  {row.type}
-                </TableCell>
-                <TableCell style={{ width: 160, borderColor: '#f5f5f5' }}>
-                  {moment(row.date).format('D MMMM YYYY')}
-                </TableCell>
-                <TableCell style={{ width: 160, borderColor: '#f5f5f5' }}>
-                  {row.status}
-                </TableCell>
-              </TableRow>
-            ))}
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
-              </TableRow>
-            )}
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => (
+                <TableRow key={row.name}>
+                  <TableCell
+                    style={{ borderColor: '#f5f5f5', display: 'flex', gap: 10 }}
+                    component="th"
+                    scope="row"
+                  >
+                    {/* <Avatar alt='profile-pic' src={Female} /> */}
+                    <div className="mt-3">{row.image}</div>
+                    <div className="mt-3">{row.name}</div>
+                  </TableCell>
+                  <TableCell style={{ width: 160, borderColor: '#f5f5f5' }}>
+                    {row.type}
+                  </TableCell>
+                  <TableCell style={{ width: 160, borderColor: '#f5f5f5' }}>
+                    {moment(row.date).format('D MMMM YYYY')}
+                  </TableCell>
+                  <TableCell style={{ width: 160, borderColor: '#f5f5f5' }}>
+                    {row.status}
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
           <TableFooter>
             <TableRow>

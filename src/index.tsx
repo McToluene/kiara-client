@@ -10,6 +10,7 @@ import '@fontsource/raleway/500.css';
 import '@fontsource/raleway/700.css';
 import './index.css';
 import App from './App';
+import {ToastContainer} from "react-toastify"
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
@@ -23,6 +24,7 @@ root.render(
         <App />
       </ThemeProvider>
     </BrowserRouter>
+    <ToastContainer />
   </React.StrictMode>
 );
 

@@ -33,7 +33,6 @@ export const fileInstance = ({ file }: Iinstance, token = true ) => {
     timeout: 50000,
     headers: {
       "Content-Type": file ? "multipart/form-data" : "application/json",
-      'X-SERVICE-ID': 'PERSONAL-APP',
     },
   });
 

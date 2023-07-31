@@ -1,3 +1,4 @@
+import { success } from '../../utils/successHandler';
 import { instance, next } from '../base';
 
 interface IReset {
@@ -25,25 +26,26 @@ interface IUser {
 }
 
 export const createAccount = async (value: Partial<IUser>) => {
-    const { data } = await instance(false)
-        .post(`users/register`, value)
-        .catch((e) => next(e));
+  const { data } = await instance(false)
+    .post(`users/register`, value)
+    .catch((e) => next(e));
 
-    return data?.data;
-}
+  return success(data);
+};
 
 export const login = async (value: Partial<IUser>) => {
   const { data } = await instance(false)
     .post(`users/login`, value)
     .catch((e) => next(e));
-  return data?.data
+  console.log('login', data);
+  return success(data);
 };
 
 export const getProfile = async (userId: string) => {
   const { data } = await instance(false)
     .get(`users/profile/${userId}`)
     .catch((e) => next(e));
-  return data?.data
+  return data?.data;
 };
 
 export const forgetPassword = async (value: IReset) => {
@@ -58,7 +60,7 @@ export const resetPassword = async (payload: IReset) => {
     .put(`users/reset-password/${payload.email}`, {
       token: payload.token,
       password: payload.password,
-      newPassword: payload.newPassword
+      newPassword: payload.newPassword,
     })
     .catch((e) => next(e));
   return data?.data;
