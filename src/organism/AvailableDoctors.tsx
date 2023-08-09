@@ -9,10 +9,8 @@ import { useState } from 'react';
 
 export default function AvailableDoctors() {
   const [limit] = useState<number>(10);
-
   // const { data } = useQuery('get-All-Doctors', () => getAllDoctors({page: 1, limit:limit}));
-  const { data } = useQuery('get-All-Doctors', () => getAllDoctors());
-  data && console.log("dataa", data?.data)
+  const { data } = useQuery('get-Doctors', () => getAllDoctors());
 
   return (
     <Grid
@@ -51,7 +49,7 @@ export default function AvailableDoctors() {
 
       <Box>
         {data?.data?.map((doctor: { _id: string, name: string, specialization: string}) => (
-          <DoctorCard key={doctor._id} name={doctor.name} description={doctor.specialization}/>
+          <DoctorCard key={doctor._id} name={doctor.name} description={doctor.specialization} doctor={doctor}/>
         ))}
       </Box>
     </Grid>

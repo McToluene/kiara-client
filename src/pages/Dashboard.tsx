@@ -11,10 +11,10 @@ export default function Dashboard() {
         <section>
           <div
           >
-            <div className="mt-10 md:w-[850px] md:mr-10">
+            <div className="mt-10 mr-5 md:mr-10">
               <DashboardHeader />
             </div>
-            <div className="mt-10 md:w-[850px] sm:w-auto md:mr-10">
+            <div className="mt-10 w-auto md:w-[850px] md:mr-10">
               <DashboardTable />
             </div>
           </div>

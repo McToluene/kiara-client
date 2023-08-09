@@ -16,9 +16,7 @@ interface PatientDetails {
 }
 
 const AboutPatientForm = () => {
-  // Create state variables to hold the values of the form fields
   const [patientDetails, setPatientDetails] = useState<PatientDetails>(() => {
-    // Retrieve data from localStorage if it exists, or return default initial values
     const storedDetails = localStorage.getItem('patientDetails');
     return storedDetails
       ? JSON.parse(storedDetails)

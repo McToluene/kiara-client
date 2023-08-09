@@ -16,7 +16,7 @@ type Appointment = {
 
 export const createAppointment = async (value: Partial<IAppointment>) => {
   const { data } = await instance(false)
-    .post(`doctors/${value.doctorId}/appointments`, value)
+    .post(`doctors/appointments`, value)
     .catch((e) => next(e));
 
   return data;

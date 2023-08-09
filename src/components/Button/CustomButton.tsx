@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 
 type StyledButtonProps = {
   isLoading?: boolean;
-  onClick?: () => void;
+  // onClick?: () => void;
   children?: React.ReactNode;
 };
 

@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useMutation } from 'react-query';
+import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Stack } from '@mui/material';
 import Tick from '../../Images/tick-circle.svg';
 import GreyTick from '../../Images/grey-tick-circle.svg';
 
 import Practice from './Practice';
-import BookingReview from './BookingReview';
 import PersonalDetails from './PersonalDetails';
 import AppointmentType from './AppointmentType';
 import ScheduleAppointment from './ScheduleAppointment';
+import BookingReview, { schema } from './BookingReview';
+import { createAppointment } from '../../server/appointment';
 import StyledButton from '../../components/Button/CustomButton';
 
 const BookAppointment = () => {
@@ -18,6 +21,67 @@ const BookAppointment = () => {
 
   const handleNext = () => {
     setActive((prevStep) => prevStep + 1);
+  };
+
+  const appointmentDate = localStorage.getItem('appointmentDate');
+  const appointmentTime = localStorage.getItem('appointmentTime');
+  const type = localStorage.getItem('appointmentType');
+  const patient = localStorage.getItem('patientDetails');
+  const recipientType = localStorage.getItem('recipient');
+  const getDoctorObject = localStorage.getItem('singleObject');
+
+  const appointment = type && JSON.parse(type);
+  const patientValue = patient && JSON.parse(patient);
+  const recipient = recipientType && JSON.parse(recipientType);
+  const doctor = getDoctorObject && JSON.parse(getDoctorObject);
+
+  const mutation = useMutation(createAppointment, {
+    onSuccess: () => {},
+    onError: (e: unknown) => {
+      if (e instanceof Error) {
+        toast.error(e.message);
+      }
+    },
+  });
+
+  const onFinish = (e?: FormEvent | FormEvent<HTMLFormElement>) => {
+    e?.preventDefault();
+    // setIsLoading(true);
+
+    // const form = e?.target as HTMLFormElement;
+    // const emailInput = form.querySelector<HTMLInputElement>('#username');
+    // const passwordInput = form.querySelector<HTMLInputElement>('#password');
+
+    // if (emailInput && passwordInput) {
+      const values: {
+        doctorId: string;
+        appointmentTime: any;
+        appointmentDate: any;
+        appointmentType: string;
+        forPerson: string;
+      } = {
+        doctorId: doctor?._id,
+        appointmentTime,
+        appointmentDate,
+        appointmentType: appointment?.type,
+        forPerson: recipient?.recipientType,
+      };
+
+      schema
+        .validate(values)
+        .then(() => {
+          mutation.mutate(values);
+          console.log('values', values);
+
+          handleNext();
+        })
+        .catch((e: any) => {
+          toast.error(e.message);
+        });
+      // setTimeout(() => {
+      //   setIsLoading(false);
+      // }, 50000);
+    // }
   };
 
   return (
@@ -32,7 +96,7 @@ const BookAppointment = () => {
                 ) : (
                   <img src={GreyTick} alt="tick" />
                 )}
-                <h1 className='text-sm'>Date & Time</h1>
+                <h1 className="text-sm">Date & Time</h1>
               </div>
               <p className="ml-9">...</p>
             </div>
@@ -43,7 +107,7 @@ const BookAppointment = () => {
                 ) : (
                   <img src={GreyTick} alt="tick" />
                 )}
-                <h1 className='text-sm'>About this practice </h1>
+                <h1 className="text-sm">About this practice </h1>
               </div>
               <p className="ml-9">...</p>
             </div>
@@ -54,7 +118,7 @@ const BookAppointment = () => {
                 ) : (
                   <img src={GreyTick} alt="tick" />
                 )}
-                <h1 className='text-sm'>Appointment type</h1>
+                <h1 className="text-sm">Appointment type</h1>
               </div>
               <p className="ml-9">...</p>
             </div>
@@ -65,7 +129,7 @@ const BookAppointment = () => {
                 ) : (
                   <img src={GreyTick} alt="tick" />
                 )}
-                <h1 className='text-sm'>Personal details</h1>
+                <h1 className="text-sm">Personal details</h1>
               </div>
               <p className="ml-9">...</p>
             </div>
@@ -119,7 +183,7 @@ const BookAppointment = () => {
                 autoComplete="off"
                 spacing={3}
               >
-                <AppointmentType/>
+                <AppointmentType />
                 <StyledButton onClick={handleNext} className="w-[358px]">
                   continue
                 </StyledButton>
@@ -137,7 +201,7 @@ const BookAppointment = () => {
                 autoComplete="off"
                 spacing={3}
               >
-                <PersonalDetails/>
+                <PersonalDetails />
                 <StyledButton onClick={handleNext} className="w-[358px]">
                   continue
                 </StyledButton>
@@ -147,6 +211,7 @@ const BookAppointment = () => {
           {active === 4 && (
             <>
               <Stack
+                onSubmit={onFinish}
                 component="form"
                 sx={{
                   width: '30ch',
@@ -155,14 +220,24 @@ const BookAppointment = () => {
                 autoComplete="off"
                 spacing={3}
               >
-                <BookingReview/>
-                <StyledButton onClick={handleNext} className="w-[358px]">
-                Confirm booking
-                </StyledButton>
+                <BookingReview />
+                {/* <StyledButton onClick={handleNext} className="w-[358px]">
+                  Confirm booking
+                </StyledButton> */}
+                {/* <h1 className="text-3xl font-semibold">Congratulation</h1>
+                <p className="mt-5 text-[#696D72] text-base">
+                  Your booking is confirmed
+                </p>
+                <StyledButton
+                  onClick={() => navigate('/dashboard')}
+                  className="w-[358px] mt-10"
+                >
+                  Go to dashboard
+                </StyledButton> */}
               </Stack>
             </>
           )}
-          {active === 5 && (
+          {/* {active === 5 && (
             <>
               <Stack
                 component="form"
@@ -173,14 +248,19 @@ const BookAppointment = () => {
                 autoComplete="off"
                 spacing={3}
               >
-                <h1 className='text-3xl font-semibold'>Congratulation</h1>
-                <p className="mt-5 text-[#696D72] text-base">Your booking is confirmed</p>
-                <StyledButton onClick={() => navigate('/dashboard')} className="w-[358px] mt-10">
-                Go to dashboard
+                <h1 className="text-3xl font-semibold">Congratulation</h1>
+                <p className="mt-5 text-[#696D72] text-base">
+                  Your booking is confirmed
+                </p>
+                <StyledButton
+                  onClick={() => navigate('/dashboard')}
+                  className="w-[358px] mt-10"
+                >
+                  Go to dashboard
                 </StyledButton>
               </Stack>
             </>
-          )}
+          )} */}
         </div>
       </div>
     </Container>

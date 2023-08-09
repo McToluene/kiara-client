@@ -18,7 +18,7 @@ export const createAppointment = async (value: Partial<IDoctor>) => {
     .post(`doctors`, value)
     .catch((e) => next(e));
 
-  return data?.data;
+  return data;
 };
 
 export const getDoctor = async (doctorId: string) => {
@@ -26,7 +26,7 @@ export const getDoctor = async (doctorId: string) => {
     .get(`doctors/${doctorId}`)
     .catch((e) => next(e));
 
-  return data?.data;
+  return data;
 };
 
 // export const getAllDoctors = async (value: Doctor) => {

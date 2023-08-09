@@ -2,25 +2,21 @@ import { Stack, TextField } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 
 const ScheduleAppointment: React.FC = () => {
-  // Create state variables to hold the values of the date and time inputs
-  const [date, setDate] = useState<string>('');
-  const [time, setTime] = useState<string>('');
+  const [appointmentDate, setAppointmentDate] = useState<string>('');
+  const [appointmentTime, setAppointmentTime] = useState<string>('');
 
-  // Function to handle changes in the date input and update the state
   const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDate(event.target.value);
+    setAppointmentDate(event.target.value);
   };
 
-  // Function to handle changes in the time input and update the state
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTime(event.target.value);
+    setAppointmentTime(event.target.value);
   };
 
-  // useEffect hook to save the date and time values to localStorage when they change
   useEffect(() => {
-    localStorage.setItem('appointmentDate', date);
-    localStorage.setItem('appointmentTime', time);
-  }, [date, time]);
+    localStorage.setItem('appointmentDate', appointmentDate);
+    localStorage.setItem('appointmentTime', appointmentTime);
+  }, [appointmentDate, appointmentTime]);
 
   return (
     <div>
@@ -44,7 +40,7 @@ const ScheduleAppointment: React.FC = () => {
           margin="normal"
           type="date"
           className="w-[358px]"
-          value={date}
+          value={appointmentDate}
           onChange={handleDateChange}
         />
         <TextField
@@ -54,7 +50,7 @@ const ScheduleAppointment: React.FC = () => {
           margin="normal"
           type="time"
           className="w-[358px]"
-          value={time}
+          value={appointmentTime}
           onChange={handleTimeChange}
         />
       </Stack>
