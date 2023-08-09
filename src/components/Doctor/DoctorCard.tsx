@@ -28,7 +28,6 @@ export default function DoctorCard(props: DoctorCardProps) {
 
   const navigateTo = () => {
     navigate('/book-appointment');
-    // grapSingleObject(singleObject);
   };
 
   const interval = () => {
