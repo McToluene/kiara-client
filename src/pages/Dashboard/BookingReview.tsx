@@ -87,6 +87,7 @@ const BookingReview: React.FC<BookingReviewProps> = (
       })
       .catch((e: any) => {
         toast.error(e.message);
+        setIsLoading(false);
       });
   };
 
@@ -95,7 +96,6 @@ const BookingReview: React.FC<BookingReviewProps> = (
       <h1 className="text-lg font-bold mt-5">Booking review</h1>
       <section className="mt-5">
         <Stack
-          // onSubmit={onFinish}
           component="form"
           sx={{
             width: '30ch',

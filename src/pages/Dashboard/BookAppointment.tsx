@@ -17,8 +17,6 @@ import StyledButton from '../../components/Button/CustomButton';
 const BookAppointment = () => {
   const [active, setActive] = useState<number>(0);
 
-  const navigate = useNavigate();
-
   const handleNext = () => {
     setActive((prevStep) => prevStep + 1);
   };
