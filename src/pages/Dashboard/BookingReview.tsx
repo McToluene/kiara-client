@@ -6,7 +6,7 @@ import Date from '../../Images/Date.svg';
 import { useMutation } from 'react-query';
 import Clock from '../../Images/clock.svg';
 import { FormEvent, useState } from 'react';
-import Avater from '../../Images/Avatar.svg';
+import Avater from '../../Images/Avatar-others.svg';
 import { useNavigate } from 'react-router-dom';
 import AnotherUser from '../../Images/other-user.svg';
 import NonEmergency from '../../Images/nonEmergency.svg';
