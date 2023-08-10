@@ -9,7 +9,7 @@ const Index = () => {
   };
 
   return (
-    <Container>
+    <div className='hidden md:hidden'>
       <div className="grid grid-cols-12 pt-20 pl-10">
         <div className="col-span-4 min-h-[calc(100vh-71px)]">
           <div className="grid gap-4 pt-10 gap-y-10">
@@ -74,7 +74,7 @@ const Index = () => {
           )}
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
 

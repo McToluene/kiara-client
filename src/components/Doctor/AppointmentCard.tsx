@@ -23,8 +23,7 @@ export default function AppointmentCard(props: AppointmentCardProps) {
       <CardContent style={{ display: 'flex', justifyContent: 'space-between' }}>
         {/* {props.image} */}
         <Avatar alt="Remy Sharp" src={image} sx={{ width: 56, height: 56 }} />
-        {/* <Box width={'403px'}> */}
-        <div className='w-[200px]'>
+        <div className='w-screen md:w-[300px] ml-4'>
           <Typography gutterBottom variant="h6">
             {props.name}
           </Typography>
@@ -48,7 +47,6 @@ export default function AppointmentCard(props: AppointmentCardProps) {
             </Typography>
           </Box>
         </div>
-        {/* </Box> */}
       </CardContent>
     </Card>
   );

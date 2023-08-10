@@ -4,9 +4,9 @@ import Star from '../../Images/stars.svg';
 const Practice = () => {
   return (
     <div>
-      <Stack spacing={2}>
+      <Stack>
         <div>
-          <h1 className="text-sm font-medium text-[#2C2E30]">About this practice</h1>
+          <h1 className="font-bold text-lg md:mt-5">About this practice</h1>
           <div className="flex gap-1 mt-5">
             <img src={Star} alt="" />
             <h1 className="text-sm font-semibold">Billing policy</h1>

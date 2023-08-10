@@ -7,7 +7,7 @@ import { useMutation } from 'react-query';
 import Stepper from '@mui/material/Stepper';
 import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import {
   Box,
   Grid,
@@ -319,6 +319,7 @@ export default function SignUp() {
                   sx={{ marginTop: '2em' }}
                   variant="contained"
                   onClick={handleComplete}
+                  isLoading={isLoading}
                 >
                   {completedSteps() === totalSteps() - 1
                     ? 'Submit'

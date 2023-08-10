@@ -24,7 +24,7 @@ export default function AvailableDoctors() {
         flexDirection: 'column',
       }}
     >
-      <Typography
+      {/* <Typography
         variant='h6'
         gutterBottom
         sx={{
@@ -32,7 +32,8 @@ export default function AvailableDoctors() {
         }}
       >
         Available Doctors
-      </Typography>
+      </Typography> */}
+      <h1 className="md:ml-2 text-lg font-medium"> Available Doctors </h1>
       <TextField
         // label='Search for a doctor....'
         placeholder='Search for a doctor....'

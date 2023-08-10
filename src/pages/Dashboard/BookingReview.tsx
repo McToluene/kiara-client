@@ -93,7 +93,7 @@ const BookingReview: React.FC<BookingReviewProps> = (
 
   return (
     <div>
-      <h1 className="text-lg font-bold mt-5">Booking review</h1>
+      <h1 className="text-lg font-bold md:mt-5">Booking review</h1>
       <section className="mt-5">
         <Stack
           component="form"
@@ -175,11 +175,11 @@ const BookingReview: React.FC<BookingReviewProps> = (
           </section>
           <div className="mt-5"></div>
           <StyledButton
-            className="w-[358px]"
-            // type="submit"
+            className="w-full md:w-[358px]"
             onClick={onFinish}
+            isLoading={isLoading}
           >
-            {isLoading ? 'Loading...' : 'Confirm bookings'}
+            {isLoading ? 'Confirming...' : 'Confirm bookings'}
           </StyledButton>
         </Stack>
       </section>

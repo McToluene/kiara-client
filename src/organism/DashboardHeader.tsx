@@ -7,8 +7,8 @@ export default function DashboardHeader() {
   return (
     <>
       <div className="">
-        <h1 className="md:ml-2">Upcoming appointments</h1>
-        <div className="flex w-[850px]">
+        <h1 className="md:ml-2 text-lg font-medium">Upcoming appointments</h1>
+        <div className="md:flex">
           {doctors?.data
             .slice(0, 2)
             ?.map(

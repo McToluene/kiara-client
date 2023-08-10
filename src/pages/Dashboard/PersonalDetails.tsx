@@ -4,7 +4,7 @@ import AboutPatientForm from '../../organism/AboutPatientForm'
 const PersonalDetails = () => {
   return (
     <div>
-      <h1 className="text-lg font-bold mt-5">About patient</h1>
+      <h1 className="text-lg font-bold md:mt-5">About patient</h1>
       <AboutPatientForm/>
     </div>
   )

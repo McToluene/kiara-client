@@ -62,15 +62,7 @@ export default function DashboardTable() {
 
   return (
     <Box width={'100%'} marginTop={{ xs: '2.5em', md: '0' }}>
-      <Typography
-        variant="h6"
-        gutterBottom
-        sx={{
-          fontWeight: 500,
-        }}
-      >
-        Appointment history
-      </Typography>
+      <h1 className="md:ml-2 text-lg font-medium"> Appointment history </h1>
       <TableContainer
         component={Paper}
         elevation={0}

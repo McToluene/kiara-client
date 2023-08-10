@@ -1,10 +1,11 @@
 import * as yup from 'yup';
+import { Link } from 'react-router-dom';
 import { FormEvent, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import StyledButton from '../components/Button/CustomButton';
-import { Link, Stack, TextField, Typography } from '@mui/material';
+import { Stack, TextField, Typography } from '@mui/material';
 
 import { login } from '../server/auth';
 
@@ -110,7 +111,7 @@ export default function LoginForm() {
         ref={formInput}
         type="password"
       />
-      <Link href="#" sx={{ marginBottom: '3em', marginTop: '.5em' }}>
+      <Link to="/forgot-password">
         Forgot Password?
       </Link>
       

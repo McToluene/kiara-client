@@ -25,7 +25,6 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <div
         className="App"
-        // style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}
       >
         <div className="">
           <Header />
