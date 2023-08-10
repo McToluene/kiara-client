@@ -1,16 +1,29 @@
-import Image from '../Images/felicia.png';
-import Profile from '../Images/Avatar-others.svg';
+import React, { useState } from 'react';
 import { SearchOutlined } from '@mui/icons-material';
 import DoctorCard from '../components/Doctor/DoctorCard';
-import { Avatar, Box, Grid, InputAdornment, TextField, Typography } from '@mui/material';
+import { Box, Grid, InputAdornment, TextField } from '@mui/material';
 import { getAllDoctors } from '../server/doctor';
 import { useQuery } from 'react-query';
-import { useState } from 'react';
 
-export default function AvailableDoctors() {
+interface Doctor {
+  _id: string;
+  name: string;
+  specialization: string;
+}
+
+export default function AvailableDoctors(): JSX.Element {
   const [limit] = useState<number>(10);
-  // const { data } = useQuery('get-All-Doctors', () => getAllDoctors({page: 1, limit:limit}));
   const { data } = useQuery('get-Doctors', () => getAllDoctors());
+
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+  };
+
+  const filteredDoctors = data?.data?.filter((doctor: Doctor) =>
+    doctor.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <Grid
@@ -24,20 +37,9 @@ export default function AvailableDoctors() {
         flexDirection: 'column',
       }}
     >
-      {/* <Typography
-        variant='h6'
-        gutterBottom
-        sx={{
-          fontWeight: 500,
-        }}
-      >
-        Available Doctors
-      </Typography> */}
       <h1 className="md:ml-2 text-lg font-medium"> Available Doctors </h1>
       <TextField
-        // label='Search for a doctor....'
         placeholder='Search for a doctor....'
-        // id='outlined-start-adornment'
         sx={{ m: 1, width: '28ch' }}
         InputProps={{
           startAdornment: (
@@ -46,10 +48,12 @@ export default function AvailableDoctors() {
             </InputAdornment>
           ),
         }}
+        value={searchQuery}
+        onChange={(e) => handleSearch(e.target.value)}
       />
 
       <Box>
-        {data?.data?.map((doctor: { _id: string, name: string, specialization: string}) => (
+        {filteredDoctors?.map((doctor: Doctor) => (
           <DoctorCard key={doctor._id} name={doctor.name} description={doctor.specialization} doctor={doctor} />
         ))}
       </Box>
