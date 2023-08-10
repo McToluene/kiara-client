@@ -111,7 +111,7 @@ export default function LoginForm() {
         ref={formInput}
         type="password"
       />
-      <Link to="/forgot-password">
+      <Link to="/forgot-password" className="mt-2 mb-3">
         Forgot Password?
       </Link>
       

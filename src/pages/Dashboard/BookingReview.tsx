@@ -74,8 +74,8 @@ const BookingReview: React.FC<BookingReviewProps> = (
         createAppointmentMutation.mutate(values, {
           onSuccess: (data) => {
             toast.success('Congratulation!!!, Your booking is confirmed');
+            navigate('/dashboard')
             setIsLoading(false);
-            navigate('/dashboard')  
           },
           onError: (e: unknown) => {
             if (e instanceof Error) {

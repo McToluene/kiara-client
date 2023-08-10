@@ -50,7 +50,7 @@ export default function AvailableDoctors() {
 
       <Box>
         {data?.data?.map((doctor: { _id: string, name: string, specialization: string}) => (
-          <DoctorCard key={doctor._id} name={doctor.name} description={doctor.specialization} doctor={doctor}/>
+          <DoctorCard key={doctor._id} name={doctor.name} description={doctor.specialization} doctor={doctor} />
         ))}
       </Box>
     </Grid>
