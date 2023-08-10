@@ -12,8 +12,8 @@ interface Doctor {
 }
 
 export default function AvailableDoctors(): JSX.Element {
-  const [limit] = useState<number>(10);
-  const { data } = useQuery('get-Doctors', () => getAllDoctors());
+  const [limit] = useState<number>(20);
+  const { data, isLoading, error } = useQuery('get-Doctors', () => getAllDoctors({ page: 1, limit: limit.toString() }));
 
   const [searchQuery, setSearchQuery] = useState<string>('');
 
@@ -21,8 +21,8 @@ export default function AvailableDoctors(): JSX.Element {
     setSearchQuery(query);
   };
 
-  const filteredDoctors = data?.data?.filter((doctor: Doctor) =>
-    doctor.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredDoctors = data?.data?.filter(
+    (doctor: Doctor) => doctor.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -32,12 +32,9 @@ export default function AvailableDoctors(): JSX.Element {
       sm={6}
       md={4}
       lg={3}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-      }}
+      className="doctor-container"
     >
-      <h1 className="md:ml-2 text-lg font-medium"> Available Doctors </h1>
+      <h1 className="md:ml-2 text-lg font-medium">Available Doctors</h1>
       <TextField
         placeholder='Search for a doctor....'
         sx={{ m: 1, width: '28ch' }}
@@ -51,6 +48,9 @@ export default function AvailableDoctors(): JSX.Element {
         value={searchQuery}
         onChange={(e) => handleSearch(e.target.value)}
       />
+
+      {/* {isLoading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>} */}
 
       <Box>
         {filteredDoctors?.map((doctor: Doctor) => (

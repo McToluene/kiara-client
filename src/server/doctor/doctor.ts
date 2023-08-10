@@ -29,10 +29,9 @@ export const getDoctor = async (doctorId: string) => {
   return data;
 };
 
-// export const getAllDoctors = async (value: Doctor) => {
-export const getAllDoctors = async () => {
+export const getAllDoctors = async (value: Doctor) => {
   const { data } = await instance(false)
-    .get(`doctors?page=${1}&limit=${10}`)
+    .get(`doctors?page=${value.page}&limit=${value.limit}`)
     .catch((e) => next(e));
 
   return data;

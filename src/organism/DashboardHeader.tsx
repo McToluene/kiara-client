@@ -1,9 +1,12 @@
 import AppointmentCard from '../components/Doctor/AppointmentCard';
 import { useQuery } from 'react-query';
 import { getAllDoctors } from '../server/doctor';
+import { useState } from 'react';
 
 export default function DashboardHeader() {
-  const { data: doctors } = useQuery('get-All-Doctors', () => getAllDoctors());
+  const [limit] = useState<number>(20);
+  const { data:doctors , isLoading, error } = useQuery('get-Doctors', () => getAllDoctors({ page: 1, limit: limit.toString() }));
+  // const { data: doctors } = useQuery('get-All-Doctors', () => getAllDoctors());
   return (
     <>
       <div className="">

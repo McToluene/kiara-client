@@ -30,11 +30,11 @@ export const getAppointment = async () => {
   return data;
 };
 
-// export const getAllAppointment = async (value: Appointment) => {
-export const getAllAppointment = async () => {
+export const getAllAppointment = async (value: Appointment) => {
+// export const getAllAppointment = async () => {
   const { data } = await instance(false)
-    // .get(`doctors/all/appointments?page=${value.page}&limit=${value.limit}`)
-    .get(`doctors/all/appointments?page=${1}&limit=${10}`)
+    .get(`doctors/all/appointments?page=${value.page}&limit=${value.limit}`)
+    // .get(`doctors/all/appointments?page=${1}&limit=${10}`)
     .catch((e) => next(e));
 
   return data;
