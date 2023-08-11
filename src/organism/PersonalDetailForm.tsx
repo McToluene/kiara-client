@@ -66,6 +66,7 @@ export default function PersonalDetailForm() {
         variant="outlined"
         size="small"
         margin="normal"
+        name='gender'
         value={personalDetails.gender}
         onChange={handleInputChange}
       />
@@ -89,6 +90,7 @@ export default function PersonalDetailForm() {
         label="Email"
         variant="outlined"
         size="small"
+        name='email'
         margin="normal"
         value={personalDetails.email}
         onChange={handleInputChange}

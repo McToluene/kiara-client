@@ -58,6 +58,85 @@ export default function SignUp() {
     [k: number]: boolean;
   }>({});
 
+  const personalDetail = localStorage.getItem('personalDetails');
+  const contactDetail = localStorage.getItem('personalDetails');
+  const medicalDetail = localStorage.getItem('medicalDetails');
+  const registerDetail = localStorage.getItem('registerDetails');
+
+  const personalData = personalDetail && JSON.parse(personalDetail); 
+  const contactData = contactDetail && JSON.parse(contactDetail); 
+  const medicalData = medicalDetail && JSON.parse(medicalDetail); 
+  const registerData = registerDetail && JSON.parse(registerDetail); 
+
+
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const mutation = useMutation(createAccount);
+
+  const onFinish = (e?: FormEvent) => {
+    e?.preventDefault();
+    setIsLoading(true);
+
+      const values: {
+        email: string;
+        gender: string;
+        firstName: string;
+        lastName: string;
+        city: string;
+        homePhone: string;
+        passcode: string;
+        address: string;
+        workPhone: string;
+        dob: string;
+        medicareNumber: number;
+        medicareLineNumber: number;
+        mobilePhone: string;
+        username: string;
+        password: string;
+      } = {
+        email: personalData.email,
+        gender: personalData.gender,
+        firstName:personalData.firstName,
+        lastName: personalData.lastName,
+        city: contactData.city,
+        homePhone: contactData.homePhoneNumber,
+        passcode: contactData.postalCode,
+        address: contactData.streetAddress,
+        workPhone: contactData.workPhoneNumber,
+        dob: medicalData.dateOfBirth,
+        medicareNumber: medicalData.medicareLineNumber,
+        medicareLineNumber: medicalData.medicareNumber,
+        mobilePhone: medicalData,
+        username: registerData.username,
+        password: registerData.password,
+      };
+
+      schema
+        .validate(values)
+        .then(() => {
+          mutation.mutate(values, {
+            onSuccess: (data) => {
+              toast.success('Congratulation!!!, You have successfully signed up.');
+              navigate('/dashboard')
+              setIsLoading(false);
+            },
+            onError: (e: unknown) => {
+              if (e instanceof Error) {
+                toast.error(e.message);
+                setIsLoading(false);
+              }
+            },
+          });
+        })
+        .catch((e) => {
+          toast.error(e.message);
+        });
+      // setTimeout(() => {
+      //   setIsLoading(false);
+      // }, 50000);
+  };
+
   const isSmallScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down('md')
   );
@@ -96,6 +175,7 @@ export default function SignUp() {
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
     handleNext();
+    onFinish()
   };
 
   const moveToDashboard = () => {
@@ -115,86 +195,6 @@ export default function SignUp() {
     RegisterDetailForm,
   ];
   const StepComponent = components[activeStep];
-
-  const personalDetail = localStorage.getItem('personalDetails');
-  const contactDetail = localStorage.getItem('personalDetails');
-  const medicalDetail = localStorage.getItem('medicalDetails');
-  const registerDetail = localStorage.getItem('registerDetails');
-
-  const personalData = personalDetail && JSON.parse(personalDetail); 
-  const contactData = contactDetail && JSON.parse(contactDetail); 
-  const medicalData = medicalDetail && JSON.parse(medicalDetail); 
-  const registerData = registerDetail && JSON.parse(registerDetail); 
-
-
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
-
-  const mutation = useMutation(createAccount, {
-    onSuccess: () => {},
-    onError: (e: unknown) => {
-      if (e instanceof Error) {
-        toast.error(e.message);
-      }
-    },
-  });
-
-  const onFinish = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    const form = e.target as HTMLFormElement;
-    const emailInput = form.querySelector<HTMLInputElement>('#username');
-    const passwordInput = form.querySelector<HTMLInputElement>('#password');
-
-    if (emailInput && passwordInput) {
-      const values: {
-        email: string;
-        gender: string;
-        firstName: string;
-        lastName: string;
-        city: string;
-        homePhone: string;
-        passcode: string;
-        address: string;
-        workPhone: string;
-        dob: string;
-        medicareNumber: number;
-        medicareLineNumber: number;
-        mobilePhone: string;
-        username: string;
-        password: string;
-      } = {
-        email: personalData.email,
-        gender: personalData.gender,
-        firstName:personalData.firstName,
-        lastName: personalData.lastName,
-        city: contactData.city,
-        homePhone: contactData.homePhoneNumber,
-        passcode: contactData.postalCode,
-        address: contactData.streetAddress,
-        workPhone: contactData.workPhoneNumber,
-        dob: medicalData.dateOfBirth,
-        medicareNumber: medicalData.medicareLineNumber,
-        medicareLineNumber: medicalData.medicareNumber,
-        mobilePhone: medicalData,
-        username: registerData.username,
-        password: registerData.password,
-      };
-
-      schema
-        .validate(values)
-        .then(() => {
-          mutation.mutate(values);
-        })
-        .catch((e) => {
-          toast.error(e.message);
-        });
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 50000);
-    }
-  };
 
   return (
     <StyledGrid container spacing={2} height={'100%'}>
@@ -281,7 +281,7 @@ export default function SignUp() {
           </Stack>
         ) : (
           <Stack
-          onSubmit={onFinish}
+          // onSubmit={onFinish}
             component="form"
             sx={{
               width: '40ch',
@@ -320,6 +320,7 @@ export default function SignUp() {
                   variant="contained"
                   onClick={handleComplete}
                   isLoading={isLoading}
+                  // type='submit'
                 >
                   {completedSteps() === totalSteps() - 1
                     ? 'Submit'

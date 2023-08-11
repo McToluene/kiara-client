@@ -6,13 +6,15 @@ interface IAppointment {
   appointmentDate?: string;
   appointmentType?: string;
   forPerson?: string;
+  patientName?: string;
+  patientEmail?: string;
 }
 
 type Appointment = {
-  next?: string
-  page: number
-  limit?: string
-}
+  next?: string;
+  page: number;
+  limit?: string;
+};
 
 export const createAppointment = async (value: Partial<IAppointment>) => {
   const { data } = await instance(false)
@@ -30,10 +32,10 @@ export const getAppointment = async () => {
   return data;
 };
 
-export const getAllAppointment = async (value: Appointment) => {
-// export const getAllAppointment = async () => {
+export const getAllAppointment = async () => {
+  // export const getAllAppointment = async () => {
   const { data } = await instance(false)
-    .get(`doctors/all/appointments?page=${value.page}&limit=${value.limit}`)
+    .get(`doctors/all/appointments`)
     // .get(`doctors/all/appointments?page=${1}&limit=${10}`)
     .catch((e) => next(e));
 
@@ -42,7 +44,9 @@ export const getAllAppointment = async (value: Appointment) => {
 
 export const getAllFutureAppointment = async (value: Appointment) => {
   const { data } = await instance(false)
-    .get(`doctors/all/future/appointments?page=${value.page}&limit=${value.limit}`)
+    .get(
+      `doctors/all/future/appointments?page=${value.page}&limit=${value.limit}`
+    )
     .catch((e) => next(e));
   return data;
 };

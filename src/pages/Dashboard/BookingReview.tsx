@@ -50,6 +50,7 @@ const BookingReview: React.FC<BookingReviewProps> = (
     e.preventDefault();
     setIsLoading(true);
     const values: {
+      doctorId: string;
       doctorName: string;
       appointmentTime: any;
       appointmentDate: any;
@@ -58,6 +59,7 @@ const BookingReview: React.FC<BookingReviewProps> = (
       patientName: string;
       patientEmail: string;
     } = {
+      doctorId: doctor?._id,
       doctorName: doctor?.name,
       appointmentTime,
       appointmentDate,

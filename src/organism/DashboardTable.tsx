@@ -38,12 +38,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 export default function DashboardTable() {
   const [page, setPage] = useState(1);
-  const [limit] = useState<number>(20);
+  const [limit] = useState<number>(2000);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const { data: rows } = useQuery('get-All-Appointment', () => getAllAppointment({ page, limit: limit.toString() }));
-  console.log("row", rows)
-
+  const { data: rows } = useQuery('get-All-Appointment', getAllAppointment);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   // const emptyRows =
@@ -119,7 +117,7 @@ export default function DashboardTable() {
           <TableFooter>
             <TableRow>
               <TablePagination
-                rowsPerPageOptions={[10, 20, { label: 'All', value: -1 }]}
+                rowsPerPageOptions={[10, 20, 30, { label: 'All', value: -1 }]}
                 colSpan={3}
                 count={rows?.data?.length}
                 rowsPerPage={rowsPerPage}

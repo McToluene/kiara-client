@@ -2,7 +2,8 @@ import Cookies from 'js-cookie';
 import axios, { AxiosError } from "axios";
 import { toast } from 'react-toastify';
 
-const BACKEND_URL  = 'https://kiara-ugwu.onrender.com/'
+const BACKEND_URL  = 'http://localhost:5000/'
+// const BACKEND_URL  = 'https://kiara-ugwu.onrender.com/'
 interface Iinstance {
   file: boolean;
 }
