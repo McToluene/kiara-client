@@ -72,7 +72,6 @@ const BookingReview: React.FC<BookingReviewProps> = (
     schema
       .validate(values)
       .then(() => {
-        console.log('values', values);
         createAppointmentMutation.mutate(values, {
           onSuccess: (data) => {
             toast.success('Congratulation!!!, Your booking is confirmed');

@@ -15,8 +15,8 @@ interface IUser {
   password?: string;
   firstName?: string;
   lastName?: string;
-  medicareNumber?: number | string;
-  medicareLineNumber?: number | string;
+  medicareNumber?: number;
+  medicareLineNumber?: number;
   address?: string;
   city?: string;
   passcode?: string;
@@ -25,7 +25,7 @@ interface IUser {
   mobilePhone?: string;
 }
 
-export const createAccount = async (value: Partial<IUser>) => {
+export const createAccount = async (value: IUser) => {
   const { data } = await instance(false)
     .post(`users/register`, value)
     .catch((e) => next(e));

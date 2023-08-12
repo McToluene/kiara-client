@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 
 interface MedicalDetails {
   dateOfBirth: string;
-  medicareNumber: string;
-  medicareLineNumber: string;
+  medicareNumber: number;
+  medicareLineNumber: number;
 }
 
 export default function MedicalDetailForm() {
@@ -14,7 +14,7 @@ export default function MedicalDetailForm() {
     const storedDetails = localStorage.getItem('medicalDetails');
     return storedDetails
       ? JSON.parse(storedDetails)
-      : { dateOfBirth: '', medicareNumber: '', medicareLineNumber: '' };
+      : { dateOfBirth: '', medicareNumber: 0, medicareLineNumber: 0 };
   });
 
   // Function to handle changes in the text fields and update the state variables
@@ -35,30 +35,35 @@ export default function MedicalDetailForm() {
   return (
     <>
       <TextField
-        id='dateOfBirth'
-        label='Date of birth'
-        variant='outlined'
-        size='small'
-        margin='normal'
-        value={medicalDetails.dateOfBirth}
+        id="dateOfBirth"
+        label="Date of birth"
+        variant="outlined"
+        margin="normal"
+        type="date"
+        name="dateOfBirth"
+        value={medicalDetails?.dateOfBirth}
         onChange={handleInputChange}
       />
       <TextField
-        id='medicareNumber'
-        label='Medicare number'
-        variant='outlined'
-        size='small'
-        margin='normal'
-        value={medicalDetails.medicareNumber}
+        id="medicareNumber"
+        label="Medicare number"
+        variant="outlined"
+        size="small"
+        margin="normal"
+        name='medicareNumber'
+        type="number"
+        value={medicalDetails?.medicareNumber}
         onChange={handleInputChange}
       />
       <TextField
-        id='medicareLineNumber'
-        label='Medicare line number'
-        variant='outlined'
-        size='small'
-        margin='normal'
-        value={medicalDetails.medicareLineNumber}
+        id="medicareLineNumber"
+        label="Medicare line number"
+        variant="outlined"
+        size="small"
+        margin="normal"
+        name='medicareLineNumber'
+        type="number"
+        value={medicalDetails?.medicareLineNumber}
         onChange={handleInputChange}
       />
     </>

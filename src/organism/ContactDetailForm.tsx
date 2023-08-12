@@ -2,7 +2,6 @@ import { TextField } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 
 interface ContactDetails {
-  username: string;
   homePhoneNumber: string;
   workPhoneNumber: string;
   streetAddress: string;
@@ -13,7 +12,6 @@ interface ContactDetails {
 export default function ContactDetailForm() {
   // Create state variables to hold the values of the text fields
   const [contactDetails, setContactDetails] = useState<ContactDetails>({
-    username: '',
     homePhoneNumber: '',
     workPhoneNumber: '',
     streetAddress: '',

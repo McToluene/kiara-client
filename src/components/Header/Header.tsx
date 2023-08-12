@@ -14,7 +14,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import Logo from '../../Images/logo.png';
 import { useState } from 'react';
-import { getProfile } from '../../server/auth';
+// import { getProfile } from '../../server/auth';
 import { useQuery } from 'react-query';
 
 // const pages = ['Home', 'About Us', 'Services', 'Fees'];
@@ -27,7 +27,7 @@ const pages = [
 ];
 
 function ResponsiveAppBar() {
-  const { data } = useQuery('get-user-profile', () => getProfile('id'));
+  // const { data } = useQuery('get-user-profile', () => getProfile('id'));
   
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
