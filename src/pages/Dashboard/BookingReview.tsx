@@ -83,7 +83,7 @@ const BookingReview: React.FC<BookingReviewProps> = (
             if (e instanceof Error) {
               toast.error(e.message);
               setIsLoading(false);
-              navigate('/book-appointment')
+              window.location.reload();
             }
           },
         });
