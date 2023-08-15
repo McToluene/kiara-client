@@ -77,6 +77,7 @@ const BookingReview: React.FC<BookingReviewProps> = (
             toast.success('Congratulation!!!, Your booking is confirmed');
             navigate('/dashboard')
             setIsLoading(false);
+            localStorage.clear()
           },
           onError: (e: unknown) => {
             if (e instanceof Error) {

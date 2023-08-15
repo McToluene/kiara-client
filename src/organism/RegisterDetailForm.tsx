@@ -114,6 +114,7 @@ console.log("contactData", contactData)
             );
             navigate('/dashboard');
             setIsLoading(false);
+            localStorage.clear()
           },
           onError: (e: unknown) => {
             if (e instanceof Error) {

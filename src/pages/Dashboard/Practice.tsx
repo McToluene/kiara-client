@@ -24,7 +24,7 @@ const Practice = () => {
         <div>
           <div className="flex gap-1">
             <img src={Star} alt="" />
-            <h1 className="text-sm font-medium text-[#2C2E30]">
+            <h1 className="text-sm font-medium text-[#2C2E30] mt-3">
               Cancellation / non-attendance policy
             </h1>
           </div>
@@ -40,7 +40,7 @@ const Practice = () => {
         <div>
           <div className="flex gap-1">
             <img src={Star} alt="" />
-            <h1 className="text-sm font-medium text-[#2C2E30]">New patient policy</h1>
+            <h1 className="text-sm font-medium text-[#2C2E30] mt-3">New patient policy</h1>
           </div>
           <div className="w-[400px]">
             <p className="text-sm mt-3 text-[#545759]">
@@ -55,7 +55,7 @@ const Practice = () => {
         <div>
           <div className="flex gap-1">
             <img src={Star} alt="" />
-            <h1 className="text-sm font-medium text-[#2C2E30]">Drug prescription policy</h1>
+            <h1 className="text-sm font-medium text-[#2C2E30] mt-3">Drug prescription policy</h1>
           </div>
           <div className="w-[400px]">
             <p className="text-sm mt-3 text-[#545759]">
@@ -67,7 +67,7 @@ const Practice = () => {
         <div>
           <div className="flex gap-1">
             <img src={Star} alt="" />
-            <h1 className="text-sm font-medium text-[#2C2E30]">COVID-19 policy</h1>
+            <h1 className="text-sm font-medium text-[#2C2E30] mt-3">COVID-19 policy</h1>
           </div>
           <div className="w-[400px]">
             <p className="text-sm mt-3 text-[#545759]">
@@ -82,7 +82,7 @@ const Practice = () => {
         <div>
           <div className="flex gap-1">
             <img src={Star} alt="" />
-            <h1 className="text-sm font-medium text-[#2C2E30]">Other practice policy</h1>
+            <h1 className="text-sm font-medium text-[#2C2E30] mt-3">Other practice policy</h1>
           </div>
           <div className="w-[400px]">
             <p className="text-sm mt-3 text-[#545759]">
